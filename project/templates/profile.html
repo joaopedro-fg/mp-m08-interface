@@ -2,6 +2,160 @@
 
 {% block content %}
 <h1 class="title">
-  Bem-vindo, {{name}}!
+  <section class="section has-background-link-light">
+    <div class="container is-fluid">
+        <nav class="level pl-6 pr-6">
+            <div class="columns">
+                <div class="column ml-5">
+                    <h3 class="subtitle is-3">Defina o diretório raiz, {{name}}</h3>
+
+                    <div class="file is-info has-name">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="resume" id="input-folder" name="input-folder" data-show-preview="false" multiple webkitdirectory accept="image/*">
+
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+
+                                <span class="file-label mr-4">
+                                    Selecione um diretório
+                                </span>
+                            </span>
+
+                            <span class="file-name has-background-white pl-6 pr-6">
+                                Nome do diretório...
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+<section class="section has-background-white">
+    <div class="container is-fullwidth">
+        <nav class="level has-background-link-light pb-6 pr-6 pl-6 ml-6 mr-6">
+            <div class="level-left">
+                <div class="collumns">
+                    <div class="collumn mr-6 ml-6">
+                        <h5 class="subtitle is-5 pt-6">Passo 1: Processamento</h5>
+
+                        <div class="buttons">
+                            <button class="button is-info is-fullwidth">Processar Imagens</span></button>
+                        </div>
+
+                        <div class="buttons">
+                            <button class="button is-info is-fullwidth">Processar Vídeos</button>
+                        </div>
+
+                        <div class="buttons">
+                            <button class="button is-info is-fullwidth">Processar Todos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="level-right">
+                <div class="collumns">
+                    <div class="collumn ml-6 mr-6">
+                        <h5 class="subtitle is-5 pt-6">Passo 2: Relatórios</h5>
+
+                        <button class="button has-background-info-dark has-text-white is-fullwidth modal-button mb-5" id="modalopen" data-target="modal" aria-haspopup="true">Configurações</button>
+
+                        <div id="modal" class="modal">
+                            <div class="modal-background" id="modalback"></div>
+                            <div class="modal-card">
+                                <header class="modal-card-head has-background-white">
+                                    <p class="modal-card-title">Configurações</p>
+                                </header>
+
+                                <section class="modal-card-body has-background-link-light">
+                                    <div class="container is-fullwidth">
+                                        <nav class="level">
+                                            <div class="level-left">
+                                                <div class="collumns">
+                                                    <div class="collumn">
+                                                        <h5 class="subtitle is-5">Limite de idade(0-13 anos):</h5>
+                                                        <h5 class="subtitle is-5">Confiança na detecção de pornografia:</h5>
+                                                        <h5 class="subtitle is-5">Confiança na detecção de face:</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="level-right">
+                                                <div class="collumns  ">
+                                                    <div class="column">
+                                                        <div class="is-fullwidth mb-4">
+                                                          <input type="range" id="vol" name="vol" min="0" max="13">
+                                                        </div>
+
+                                                        <div class="control mb-2">
+                                                            <input class="input" type="text" placeholder="Entre 0 e 1" />
+                                                        </div>
+
+                                                        <div class="control mb-3  ">
+                                                            <input class="input" type="text" placeholder="Entre 0 e 1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <button class="modal-close is-large" id="modalclose" aria-label="close"></button>
+
+                            <script>
+                                $(document).ready(function(){
+                                    $("#modalopen").click(function(){
+                                        $("#modal").addClass("is-active");
+                                    });
+
+                                    $("#modalclose").click(function(){
+                                        $("#modal").removeClass("is-active");
+                                    });
+
+                                    $("#modalback").click(function(){
+                                        $("#modal").removeClass("is-active");
+                                    });
+
+                                });
+                            </script>
+                        </div>
+
+                        <div class="buttons">
+                            <button class="button is-info is-fullwidth">Gerar Relatório de Imagens</span></button>
+                        </div>
+
+                        <div class="buttons">
+                            <button class="button is-info is-fullwidth">Gerar Relatório de Vídeos</button>
+                        </div>
+
+                        <div class="buttons">
+                            <button class="button is-info is-fullwidth">Gerar Relatório de Todos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+<section class="section has-background-link-light">
+    <div class="container is-fluid">
+        <h5 class="subtitle is-5 pl-6 ml-5">Log do Processamento</h5>
+
+        <nav class="level pl-5 pr-5">
+            <main role="main" class="column ml-6 mr-6 pt-5 pb-5 pl-5 pr-5 box-deco has-background-white">
+                <article class="blog-post">
+                    <h4 class="title is-4">Área de Log</h4>
+                </article>
+            </main>
+        </nav>
+    </div>
+</section>
 </h1>
 {% endblock %}
