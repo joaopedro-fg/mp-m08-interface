@@ -87,17 +87,20 @@
                                             <div class="level-right">
                                                 <div class="collumns  ">
                                                     <div class="column">
+							<form action="{{ url_for('main.profile') }}" method="post">
                                                         <div class="is-fullwidth mb-4">
-                                                          <input type="range" id="vol" name="vol" min="0" max="13">
+                                                          <input type="range" id="vol" name="vol" min="0" max="13" name="info1">
                                                         </div>
 
                                                         <div class="control mb-2">
-                                                            <input class="input" type="text" placeholder="Entre 0 e 1" />
+                                                            <input class="input" type="text" placeholder="Entre 0 e 1" name="info2" />
                                                         </div>
 
                                                         <div class="control mb-3  ">
-                                                            <input class="input" type="text" placeholder="Entre 0 e 1" />
+                                                            <input class="input" type="text" placeholder="Entre 0 e 1" name="info3"/>
                                                         </div>
+							<input type="submit" value="Submit">
+							</form>
                                                     </div>
                                                 </div>
                                             </div>
