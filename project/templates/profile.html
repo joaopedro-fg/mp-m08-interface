@@ -3,13 +3,13 @@
 {% block content %}
 <h1 class="title">
   <section class="section has-background-link-light">
-    <div class="container is-fluid">
+    <div class="container">
         <nav class="level pl-6 pr-6">
             <div class="columns">
-                <div class="column ml-5">
+                <div class="collumn is-fluid">
                     <h3 class="subtitle is-3">Defina o diretório raiz, {{name}}</h3>
 
-                    <div class="file is-info has-name">
+                    <div class="file is-small is-info has-name ml-6">
                         <label class="file-label">
                             <input class="file-input" type="file" name="resume" id="input-folder" name="input-folder" data-show-preview="false" multiple webkitdirectory accept="image/*">
 
@@ -18,7 +18,7 @@
                                     <i class="fas fa-upload"></i>
                                 </span>
 
-                                <span class="file-label mr-4">
+                                <span class="file-label mr-5">
                                     Selecione um diretório
                                 </span>
                             </span>
@@ -39,11 +39,23 @@
         <nav class="level has-background-link-light pb-6 pr-6 pl-6 ml-6 mr-6">
             <div class="level-left">
                 <div class="collumns">
-                    <div class="collumn mr-6 ml-6">
-                        <h5 class="subtitle is-5 pt-6">Passo 1: Processamento</h5>
+                    <div class="collumn pt-6 ml-6 pl-6 pr-6 pb-6">
+                        <h5 class="subtitle is-5 pr-6 mr-5">Defina o nome da análise:</h5>
+
+                        <div class="field has-addons">
+                            <div class="control">
+                                <input class="input pr-6" type="text" placeholder="Insira um nome único">
+                            </div>
+
+                            <div class="control">
+                                <a class="button has-background-info-dark has-text-white">Definir</a>
+                            </div>
+                        </div>
+
+                        <h5 class="subtitle is-5 pt-6 pr-6 mr-6">Passo 1: Processamento</h5>
 
                         <div class="buttons">
-                            <button class="button is-info is-fullwidth">Processar Imagens</span></button>
+                            <button class="button is-info is-fullwidth">Processar Imagens</button>
                         </div>
 
                         <div class="buttons">
@@ -59,8 +71,8 @@
 
             <div class="level-right">
                 <div class="collumns">
-                    <div class="collumn ml-6 mr-6">
-                        <h5 class="subtitle is-5 pt-6">Passo 2: Relatórios</h5>
+                    <div class="collumn mt-6 pt-6 ml-6 mr-6 pr-6 pb-6">
+                        <h5 class="subtitle is-5 pt-6 pr-6 mr-6 pl-2">Passo 2: Relatórios</h5>
 
                         <button class="button has-background-info-dark has-text-white is-fullwidth modal-button mb-5" id="modalopen" data-target="modal" aria-haspopup="true">Configurações</button>
 
@@ -76,31 +88,41 @@
                                         <nav class="level">
                                             <div class="level-left">
                                                 <div class="collumns">
-                                                    <div class="collumn">
-                                                        <h5 class="subtitle is-5">Limite de idade(0-13 anos):</h5>
-                                                        <h5 class="subtitle is-5">Confiança na detecção de pornografia:</h5>
-                                                        <h5 class="subtitle is-5">Confiança na detecção de face:</h5>
+                                                    <div class="collumn pl-3 pr-3 pb-6">
+                                                        <h5 class="subtitle is-5 has-text-left pt-4 pb-2">Limite de idade:</h5>
+                                                        <h5 class="subtitle is-5 has-text-left pb-2 pr-4">Confiança na detecção de pornografia:</h5>
+                                                        <h5 class="subtitle is-5 has-text-left">Confiança na detecção de face:</h5>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="level-right">
                                                 <div class="collumns  ">
-                                                    <div class="column">
-							<form action="{{ url_for('main.profile') }}" method="post">
-                                                        <div class="is-fullwidth mb-4">
-                                                          <input type="range" id="vol" name="vol" min="0" max="13" name="info1">
-                                                        </div>
+                                                    <div class="column mt-6 pt-6 pl-3 pr-3">
+							                            <form action="{{ url_for('main.profile') }}" method="post">
+                                                            <div class="control">
+                                                                <div class="select is-fullwidth mb-2">
+                                                                    <select>
+                                                                        <option>Selecione</option>
+                                                                        <option>Idades 1</option>
+                                                                        <option>Idades 2</option>
+                                                                        <option>Idades 3</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
 
-                                                        <div class="control mb-2">
-                                                            <input class="input" type="text" placeholder="Entre 0 e 1" name="info2" />
-                                                        </div>
+                                                            <div class="control mb-2">
+                                                                <input class="input mt-2" type="text" placeholder="Insira um valor entre 0 e 1" name="info2" />
+                                                            </div>
 
-                                                        <div class="control mb-3  ">
-                                                            <input class="input" type="text" placeholder="Entre 0 e 1" name="info3"/>
-                                                        </div>
-							<input type="submit" value="Submit">
-							</form>
+                                                            <div class="control mb-3  ">
+                                                                <input class="input mt-2" type="text" placeholder="Insira um valor entre 0 e 1" name="info3"/>
+                                                            </div>
+
+                                                            <div class="control">
+                                                                <button class="button has-background-info-dark has-text-white is-fullwidth mt-6" type="submit" value="Submit">Definir</button>
+                                                            </div>
+							                            </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +152,7 @@
                         </div>
 
                         <div class="buttons">
-                            <button class="button is-info is-fullwidth">Gerar Relatório de Imagens</span></button>
+                            <button class="button is-info is-fullwidth">Gerar Relatório de Imagens</button>
                         </div>
 
                         <div class="buttons">
@@ -148,11 +170,11 @@
 </section>
 
 <section class="section has-background-link-light">
-    <div class="container is-fluid">
-        <h5 class="subtitle is-5 pl-6 ml-5">Log do Processamento</h5>
+    <div class="container is-fullwidth">
+        <h5 class="subtitle is-5">Log do Processamento</h5>
 
         <nav class="level pl-5 pr-5">
-            <main role="main" class="column ml-6 mr-6 pt-5 pb-5 pl-5 pr-5 box-deco has-background-white">
+            <main role="main" class="column box-deco has-background-white">
                 <article class="blog-post">
                     <h4 class="title is-4">Área de Log</h4>
                 </article>
