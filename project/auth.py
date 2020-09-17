@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
 from . import db
 from flask_login import login_user, logout_user, login_required
+from . import dialog 
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login')
@@ -44,6 +45,7 @@ def login_post():
         flash('Por favor, cheque suas credenciais e tente novamente.')
         return redirect(url_for('auth.login'))
     login_user(user, remember=remember)
+    dialog._open_dialog_file()
     return redirect(url_for('main.profile'))
 @auth.route('/logout')
 @login_required
