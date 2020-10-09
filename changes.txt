@@ -1,0 +1,19 @@
+As mudanças realizadas na última versão foram:
+Alterações na usabilidade do App(Alterações de rotas)
+Adição da interatividade com o relatório
+
+Arquivos que sofreram mudança:
+templates/base.html
+templates/index.html
+templates/report.html
+main.py
+
+Arquivos deletados:
+home.html
+
+Integração com a aplicação principal:
+Esses arquivos não possuem as funções que realizam a análise de imagens/vídeos, assim, os arquivos main.py e new_analysis.html sofreram algumas mudações ao realizar a integração da interface no estágio atual com a aplicação(Adição de funções no main.py e alteração da função log apra que ela leia o atributo que indica o path do txt do log e adição de funções nos botões de análise no new_analysis.html)
+
+Próximos passos antes da entrega:
+Correção do visual do relatório
+Dinamização da geração de relatório(Possíveis caminhos: iFrame, container/código direto)
