@@ -103,7 +103,7 @@
           {% for entry in contents if entry.type == 'file' %}
           <tr>
               <td class="text-xs-left " data-sort-value="file-{{entry.name | lower}}"><i class="fa fa-fw {{entry.name | icon_fmt}} " aria-hidden="true"></i>&nbsp;
-              <a {% if entry.name | data_fmt not in ['unknown', 'archive'] %} data-toggle="modal" data-target="#viewer-modal" data-type="{{entry.name | data_fmt}}" {% endif %} href="{{entry.name}}" data-size="{{entry.size | size_fmt}}">{{entry.name}}</a>
+              <a {% if entry.name | data_fmt not in ['unknown', 'archive'] %}  data-type="{{entry.name | data_fmt}}" {% endif %} href="{{entry.name}}" data-size="{{entry.size | size_fmt}}">{{entry.name}}</a>
               </td>
               <td class="text-xs-right " data-sort-value="{{entry.size}}" title="{{entry.size}} bytes">{{entry.size | size_fmt}}</td>
               <td class="text-xs-right " data-sort-value="{{entry.mtime}}" title="{{entry.mtime | time_fmt}}">{{entry.mtime | humanize}}</td>
@@ -112,31 +112,6 @@
         </tbody>
       </table>
     </div>
-    <div class="modal fade" id="viewer-modal" tabindex="-1" role="dialog" aria-labelledby="file-name" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close pull-xs-right" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title text-left" id="file-name">&nbsp;</h4>
-            <small class="text-muted" id="file-meta"></small>
-          </div>
-          <div class="modal-body"></div>
-          <div class="modal-footer">
-            <div class="pull-xs-left">
-              <button type="button" class="btn btn-link highlight hidden-xs-up">Apply syntax highlighting</button>
-            </div>
-            <div class="pull-xs-right">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-              <div class="btn-group">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <script type="text/javascript" src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
   <script type="text/javascript" src="{{url_for('static', filename='js/tether.min.js')}}"></script>
   <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
