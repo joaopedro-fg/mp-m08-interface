@@ -17,3 +17,4 @@ Esses arquivos não possuem as funções que realizam a análise de imagens/víd
 Próximos passos antes da entrega:
 Correção do visual do relatório
 Dinamização da geração de relatório(Possíveis caminhos: iFrame, container/código direto)
+Bibliotecas Locais(Bulma/DataTable)
