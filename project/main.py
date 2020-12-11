@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, current_app
+from flask import Blueprint, render_template, request, jsonify, current_app, redirect, url_for
 from . import db
 from . import dialog
 from flask_login import login_required, current_user
@@ -16,7 +16,7 @@ import sys
 from pathlib2 import Path
 
 main = Blueprint('main', __name__)
-
+global_path = 'Caminho do Diretório'
 @main.route('/')
 def index():
     return render_template('index.html')
@@ -38,12 +38,13 @@ def funcao_teste():
         log_str +="<br>"
     f.close()
     return log_str
-
-@main.route('/SOdialog')
+@main.route('/set_new_analysis', methods=['POST', 'GET'])
 @login_required
-def SOdialog():
-    path = dialog._open_dialog_file()
-    return jsonify(path=path)
+def set_new_analysis():
+    global global_path
+    path_name = request.args.get('path_name')
+    global_path = path_name
+    return render_template('new_analysis.html', name=current_user.name)
 
 @main.route('/new_analysis', methods=['POST', 'GET'])
 @login_required
@@ -55,12 +56,38 @@ def new_analysis():
 @main.route('/search_analysis', methods=['POST', 'GET'])
 @login_required
 def search_analysis():
-    return render_template('search_analysis.html')
+    return render_template('search_analysis.html', name=current_user.name, id_process=1, buffer='log_obj.buffer',  
+                                                   conf_nsfw='conf', conf_face='conf', 
+                                                   conf_child='conf', conf_age='conf')
+@main.route('/set_analysis', methods=['POST', 'GET'])
+@login_required
+def set_analysis():
+    #global log_obj
+    #global id_process
+
+    analysis_path = request.args.get('path_name')
+    '''
+    if analysis_path is not None and analysis_path != '' and isinstance(analysis_path, str):
+        log_obj.send(('imprime', 
+                      '{1} - [{0}] Importando dados de análise'.format(current_user.name,
+                                                                     datetime.now().strftime("%d/%m/%Y %H:%M:%S")) 
+                     ))
+        
+        idx = analysis_path.rfind('.')
+        id_process = os.path.basename(analysis_path[:idx])
+        log_obj.set_id(id_process, search=True)
+        return jsonify(id_process=id_process)
+        
+    flash('Erro ao carregar arquivo.'.format(id_process), 'error')
+    '''
+    print(analysis_path)
+    return redirect(url_for('main.search_analysis')) 
 @main.route('/report', methods=['POST', 'GET'])
 @login_required
 def report():
     return render_template('report.html', name=current_user.name, id_report="123456", path="teste/teste/teste")
-root = os.path.normpath(os.getenv('FS_PATH', '/mnt/c/users/jpedr/Downloads'))
+# Código do sistema de arquivos começa aqui
+root = os.path.normpath(os.getenv('FS_PATH', ''))
 key = os.getenv('FS_KEY')
 
 ignored = ['.bzr', '$RECYCLE.BIN', '.DAV', '.DS_Store', '.git', '.hg', '.htaccess', '.htpasswd', '.Spotlight-V100', '.svn', '__MACOSX', 'ehthumbs.db', 'robots.txt', 'Thumbs.db', 'thumbs.tps']
@@ -173,7 +200,7 @@ class PathView(MethodView):
                 info['size'] = sz
                 total['size'] += sz
                 contents.append(info)
-            page = render_template('busca_arquivo.html', path=p, contents=contents, total=total, hide_dotfile=hide_dotfile)
+            page = render_template('busca_arquivo.html', path=p, contents=contents, total=total, hide_dotfile=hide_dotfile,real_path=path)
             res = make_response(page, 200)
             res.set_cookie('hide-dotfile', hide_dotfile, max_age=16070400)
         elif os.path.isfile(path):
@@ -283,3 +310,4 @@ class PathView(MethodView):
 path_view = PathView.as_view('path_view')
 main.add_url_rule('/arquivos', view_func=path_view)
 main.add_url_rule('/<path:p>', view_func=path_view)
+#Código do sistema de arquivos termina aqui

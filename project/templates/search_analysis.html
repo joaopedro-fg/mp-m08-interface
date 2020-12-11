@@ -1,4 +1,124 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Buscar Análise</h1>
+<h1 class="title">
+    <section class="section has-background-link-light">
+        <div class="container">
+            <nav class="level pl-6 pr-6">
+                <div class="columns">
+                    <div class="collumn is-fluid">
+                        <h3 class="subtitle is-3">Defina o diretório raiz, {{name}}</h3>
+                        <a href="{{url_for('main.path_view')}}"></a>
+                        <div class="file is-small is-info has-name">
+                            <a href="{{url_for('main.path_view')}}"><button class="button is-info is-fullwidth">Selecione o Diretório</button></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+<section class="section has-background-white">
+    <div class="container is-fullwidth">
+        <div class="container has-background-link-light pb-6 pr-6 pl-6 ml-6 mr-6">
+
+			<h4 class="my-2 has-text-centered pt-3 pb-3">Relatórios</h4>
+
+			<button class="button has-background-info-dark has-text-white modal-button mb-5" style="width: 40%;" id="modalopen" data-target="modal" aria-haspopup="true">Configurações</button>
+
+			<div id="modal" class="modal">
+				<div class="modal-background" id="modalback"></div>
+				<div class="modal-card">
+					<header class="modal-card-head has-background-white">
+						<p class="modal-card-title">Configurações</p>
+					</header>
+
+					<section class="modal-card-body has-background-link-light">
+						<div class="container is-fullwidth">
+							<nav class="level">
+								<div class="level-left">
+									<div class="collumns">
+										<div class="collumn pl-3 pr-3 pb-6">
+											<h5 class="subtitle is-5 has-text-left pb-2 pr-4">Limiar de pornografia:</h5>
+											<h5 class="subtitle is-5 has-text-left pb-2 pr-4">Limiar da detecção de face:</h5>
+											<h5 class="subtitle is-5 has-text-left pb-2 pr-4">Limiar da detecção de crianças:</h5>
+											<h5 class="subtitle is-5 has-text-left pb-2 pr-4">Limiar da estimativa de idade:</h5>
+										</div>
+									</div>
+								</div>
+
+								<div class="level-right">
+									<div class="collumns  ">
+										<div class="column mt-6 pt-6 pl-3 pr-3">
+											<form action="/settings/search" method="post">
+												
+												<div class="control mb-2">
+													<input class="input" type="text" value={{ conf_nsfw }} name="conf_nsfw" />
+												</div>
+
+												<div class="control mb-3  ">
+													<input class="input mt-2" type="text" value={{ conf_face }} name="conf_face"/>
+												</div>
+												
+												<div class="control mb-3  ">
+													<input class="input mt-2" type="text" value={{ conf_child }} name="conf_child"/>
+												</div>
+												
+												<div class="control mb-3  ">
+													<input class="input mt-2" type="text" value={{ conf_age }} name="conf_age"/>
+												</div>
+
+												<div class="control">
+													<button class="button has-background-info-dark has-text-white is-fullwidth mt-6" type="submit" value="Submit">Definir</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</nav>
+						</div>
+					</section>
+				</div>
+
+				<button class="modal-close is-large" id="modalclose" aria-label="close"></button>
+
+				<script>
+					$(document).ready(function(){
+						$("#modalopen").click(function(){
+							$("#modal").addClass("is-active");
+						});
+
+						$("#modalclose").click(function(){
+							$("#modal").removeClass("is-active");
+						});
+
+						$("#modalback").click(function(){
+							$("#modal").removeClass("is-active");
+						});
+
+					});
+				</script>
+			</div>
+			
+		
+        </div>
+    </div>
+</section>
+
+<section class="section has-background-link-light">
+    <div class="container is-fullwidth">
+		<form action="/log/search" method="post">
+		<label class="subtitle is-3">Log do Processamento </label> 
+		<button type="submit" class="button is-link ml-2"> 
+			<span> Atualizar </span>
+		</button>
+		</form>
+
+		<main role="main" class="column box-deco has-background-white">
+			<article class="blog-post">
+				<p id="log" style='text-align: left; overflow-y: scroll; max-height: 300px; font-size: medium; white-space: pre-wrap'> {{ buffer }} </p>
+			</article>
+		</main>
+
+    </div>
+</section>
+
 {% endblock %}
