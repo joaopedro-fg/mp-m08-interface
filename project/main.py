@@ -4,7 +4,7 @@ from . import dialog
 from flask_login import login_required, current_user
 from flask import Flask, make_response, request, session, render_template, send_file, Response
 from flask.views import MethodView
-from werkzeug.utils import secure_filename
+from werkzeug.utils import secure_filename, safe_join
 from datetime import datetime
 import humanize
 import os
@@ -178,7 +178,7 @@ class PathView(MethodView):
     def get(self, p=''):
         hide_dotfile = request.args.get('hide-dotfile', request.cookies.get('hide-dotfile', 'no'))
 
-        path = os.path.join(root, p)
+        path = safe_join(root, p)
 
         if os.path.isdir(path):
             contents = []
